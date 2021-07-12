@@ -75,10 +75,10 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     VectorXd y = z - h_;
     // Check if angle is within -pi to pi, if not then make it between -pi to pi
     if(y[1] < -M_PI){
-      y[1] += (double(2) * M_PI);
+      y[1] += ((double)2 * M_PI);
     }
     if(y[1] > M_PI){
-      y[1] -= (double(2) * M_PI);
+      y[1] -= ((double)2 * M_PI);
     }
     
     MatrixXd Ht = H_.transpose();
