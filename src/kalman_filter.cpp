@@ -62,9 +62,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   VectorXd h_ = VectorXd(3);
   double sq_px = x_[0] * x_[0];
   double sq_py = x_[1] * x_[1];
-  cout<<endl;
-  cout<<"x_[0]: "<<x_[0]<<" x_[1]: "<<x_[1]<<endl;
-  cout<<endl;
+  //cout<<endl;
+  //cout<<"x_[0]: "<<x_[0]<<" x_[1]: "<<x_[1]<<endl;
+  //cout<<endl;
   if(sq_px == 0 && sq_py == 0){
     cout<<"KalmanFilter::UpdateEKF() - Px and Py are zero: Divide by Zero Condition"<<endl;
 } else if(sq_py == 0){
