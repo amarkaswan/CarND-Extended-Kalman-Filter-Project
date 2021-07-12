@@ -60,18 +60,14 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
    * TODO: update the state by using Extended Kalman Filter equations
    */
   VectorXd h_ = VectorXd(3);
-  double sq_px = x_[0] * x_[0];
-  double sq_py = x_[1] * x_[1];
-  //cout<<endl;
-  //cout<<"x_[0]: "<<x_[0]<<" x_[1]: "<<x_[1]<<endl;
-  //cout<<endl;
-  if(sq_px == 0 && sq_py == 0){
-    cout<<"KalmanFilter::UpdateEKF() - Px and Py are zero: Divide by Zero Condition"<<endl;
-} else if(sq_py == 0){
-    cout<<"KalmanFilter::UpdateEKF() - Py is zero: Divide by Zero Condition"<<endl;
+  if(x_[0] == 0 && x_[1] == 0){
+    cout<<"KalmanFilter::UpdateEKF() - Px and Py are zero: Divide by Zero"<<endl;
+} else if(x_[1] == 0){
+    cout<<"KalmanFilter::UpdateEKF() - Px is zero: Divide by Zero"<<endl;
   }
   else{
-    
+    double sq_px = x_[0] * x_[0];
+    double sq_py = x_[1] * x_[1];
     h_[0] = sqrt(sq_px + sq_py);
     h_[1] = atan(x_[1]/x_[0]);
     h_[2] = (x_[0] * x_[2] + x_[1] * x_[3])/ sqrt(sq_px + sq_py);
