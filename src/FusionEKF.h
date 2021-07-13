@@ -46,8 +46,8 @@ class FusionEKF {
   Eigen::MatrixXd Hj_;
   
   //acceleration noise components
-  float noise_ax;
-  float noise_ay;
+  double noise_ax;
+  double noise_ay;
   
 };
 

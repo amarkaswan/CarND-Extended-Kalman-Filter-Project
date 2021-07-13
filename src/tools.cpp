@@ -14,29 +14,27 @@ Tools::~Tools() {}
 VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &ground_truth) {
   /**
-   * TODO: Calculate the RMSE here.
+   * Calculate the RMSE here.
    */
   VectorXd rmse(4);
   rmse << 0,0,0,0;
 
-  // TODO: YOUR CODE HERE
   // check the validity of the following inputs:
   if(estimations.size() == 0) {
-    cout<<"CalculateRMSE () - Error - Estimation Vector Size is Zero"<<endl;
-    return rmse;
+    throw "CalculateRMSE () - Error - Estimation Vector Size is Zero";
   } else if(estimations.size() != ground_truth.size()){
-    cout<<"CalculateRMSE () - Error - Estimation Vector Size is not Equal to Ground Truth Vector Size"<<endl;
-    return rmse;
-  } 
-  // TODO: accumulate squared residuals
-  for (unsigned int i=0; i < estimations.size(); ++i) {
-    for (unsigned int j=0; j < estimations[i].size(); ++j) {
+    throw "CalculateRMSE () - Error - Estimation Vector Size is not Equal to Ground Truth Vector Size";
+  } else{
+    // TODO: accumulate squared residuals
+    for (unsigned int i=0; i < estimations.size(); ++i) {
+      for (unsigned int j=0; j < estimations[i].size(); ++j) {
         rmse[j] = rmse[j] + (estimations[i][j] - ground_truth[i][j]) * (estimations[i][j] - ground_truth[i][j]);
+      }
     }
-  }
-  for (unsigned int j=0; j < estimations[0].size(); ++j) {
-    rmse[j] = rmse[j] / estimations.size();
-    rmse[j] = sqrt(rmse[j]);
+    for (unsigned int j=0; j < estimations[0].size(); ++j) {
+      rmse[j] = rmse[j] / estimations.size();
+      rmse[j] = sqrt(rmse[j]);
+    }
   }
   // return the result
   return rmse;
@@ -44,19 +42,21 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 
 MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   /**
-   * TODO:
    * Calculate a Jacobian here.
    */
   MatrixXd Hj(3,4);
+  Hj << 0, 0, 0, 0,
+        0, 0, 0, 0,
+        0, 0, 0, 0;
+  
   // recover state parameters
   double px = x_state(0);
   double py = x_state(1);
   double vx = x_state(2);
   double vy = x_state(3);
-
   if(px == 0 && py == 0) {
       // check division by zero
-      cout<<"CalculateJacobian () - Error - Division by Zero"<<endl;
+      throw "CalculateJacobian () - Error - Division by Zero";
    }
    else{
       // compute the Jacobian matrix 
