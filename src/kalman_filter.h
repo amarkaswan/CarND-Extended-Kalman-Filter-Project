@@ -34,6 +34,8 @@ class KalmanFilter {
    */
   void Predict();
 
+  // Function to implement common equations for KF and EKF
+  void CommonUpdate(const Eigen::VectorXd &y);
   /**
    * Updates the state by using standard Kalman Filter equations
    * @param z The measurement at k+1
@@ -45,7 +47,6 @@ class KalmanFilter {
    * @param z The measurement at k+1
    */
   void UpdateEKF(const Eigen::VectorXd &z);
-
   // state vector
   Eigen::VectorXd x_;
 

@@ -54,26 +54,26 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
   double py = x_state(1);
   double vx = x_state(2);
   double vy = x_state(3);
-  if(px == 0 && py == 0) {
-      // check division by zero
+  // check division by zero
+  if(px == 0.0 && py == 0.0) {
       throw "CalculateJacobian () - Error - Division by Zero";
    }
    else{
       // compute the Jacobian matrix 
-      double sq_px = px * px;
-      double sq_py = py * py;
-      Hj(0,0) = px / sqrt(sq_px + sq_py);
-      Hj(0,1) = py / sqrt(sq_px + sq_py);
+      double sq_pxy = px * px + py * py;
+      double sqrt_pxy = sqrt(sq_pxy);
+      double pow3by2_sq_pxy = sq_pxy * sqrt_pxy;
+     
+      Hj(0,0) = px / sqrt_pxy;
+      Hj(0,1) = py / sqrt_pxy;
       
-      Hj(1,0) = - (py / (sq_px + sq_py));
-      Hj(1,1) = (px / (sq_px + sq_py));
+      Hj(1,0) = -py / sq_pxy;
+      Hj(1,1) = px / sq_pxy;
       
-      double pow3by2_sq_px_py = (sq_px + sq_py) * sqrt(sq_px + sq_py);
-      //cout<<"pow3by2_sq_px_py: "<<pow3by2_sq_px_py<<endl;
-      Hj(2,0) = (py * ((vx * py) - (vy * px))) / pow3by2_sq_px_py;
-      Hj(2,1) = (px * ((vy * px) - (vx * py))) / pow3by2_sq_px_py;
-      Hj(2,2) = px / sqrt(sq_px + sq_py);
-      Hj(2,3) = py / sqrt(sq_px + sq_py);
+      Hj(2,0) = (py * (vx * py - vy * px)) / pow3by2_sq_pxy;
+      Hj(2,1) = (px * (vy * px - vx * py)) / pow3by2_sq_pxy;
+      Hj(2,2) =  Hj(0,0);
+      Hj(2,3) =  Hj(0,1);
    }
   return Hj;
 }

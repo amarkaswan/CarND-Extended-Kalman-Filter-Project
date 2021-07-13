@@ -41,9 +41,9 @@ FusionEKF::FusionEKF() {
   // state covariance matrix P
   ekf_.P_ = MatrixXd(4, 4);
   ekf_.P_ << 1, 0, 0, 0,
-            0, 1, 0, 0,
-            0, 0, 1000, 0,
-            0, 0, 0, 1000;
+             0, 1, 0, 0,
+             0, 0, 1000, 0,
+             0, 0, 0, 1000;
 
   // the initial transition matrix F_
   ekf_.F_ = MatrixXd(4, 4);
@@ -106,8 +106,12 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
   double dt = (measurement_pack.timestamp_ - previous_timestamp_) / 1000000.0; //Time is measured in seconds.
   previous_timestamp_ = measurement_pack.timestamp_;
   //Check if the new data is from a different timestamp than the previous timestamp
-  if(dt != 0){
+  if(dt != 0.0){
     // 1. Modify the F matrix so that the time is integrated
+    double dt_pow2 = dt * dt;
+    double dt_pow3 = dt_pow2 * dt;
+    double dt_pow4 =  dt_pow3 * dt;
+    
     ekf_.F_(0,2) = dt;
     ekf_.F_(1,3) = dt;
 
@@ -117,17 +121,17 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
               0, 0, 0, 0,
               0, 0, 0, 0,
               0, 0, 0, 0;
-    ekf_.Q_(0,0) = (pow(dt, 4) / 4) * noise_ax; 
-    ekf_.Q_(0,2) = (pow(dt, 3) / 2) * noise_ax; 
+    ekf_.Q_(0,0) = (dt_pow4 / 4) * noise_ax; 
+    ekf_.Q_(0,2) = (dt_pow3 / 2) * noise_ax; 
   
-    ekf_.Q_(1,1) = (pow(dt, 4) / 4) * noise_ay; 
-    ekf_.Q_(1,3) = (pow(dt, 3) / 2) * noise_ay;
+    ekf_.Q_(1,1) = (dt_pow4 / 4) * noise_ay; 
+    ekf_.Q_(1,3) = (dt_pow3 / 2) * noise_ay;
   
-    ekf_.Q_(2,0) = (pow(dt, 3) / 2) * noise_ax; 
-    ekf_.Q_(2,2) = pow(dt, 2) * noise_ax; 
+    ekf_.Q_(2,0) = (dt_pow3 / 2) * noise_ax; 
+    ekf_.Q_(2,2) = dt_pow2 * noise_ax; 
   
-    ekf_.Q_(3,1) = (pow(dt, 3) / 2) * noise_ay; 
-    ekf_.Q_(3,3) = pow(dt, 2) * noise_ay;
+    ekf_.Q_(3,1) = (dt_pow3 / 2) * noise_ay; 
+    ekf_.Q_(3,3) = dt_pow2 * noise_ay;
   
     // 3. Call the Kalman Filter predict() function
     ekf_.Predict();
@@ -144,20 +148,20 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
   if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) {
     // Radar updates
-    // Update the H matrix for radar
-    try {
+    // Update the H matrix for radar 
+    try{
       ekf_.H_ = tools.CalculateJacobian(ekf_.x_);
     } catch (const char* msg) {
       cerr << msg << endl;
-    }
+    } 
     // update the R matrix with radar
     ekf_.R_ = R_radar_;
-    try { //perform update for radar data
+    // perform update for the radar data
+    try{
       ekf_.UpdateEKF(measurement_pack.raw_measurements_);
     } catch (const char* msg) {
       cerr << msg << endl;
-    }
-    
+    }  
   } else {
     // Laser updates
     // Update the H matrix with laser
