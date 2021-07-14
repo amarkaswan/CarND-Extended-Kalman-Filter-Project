@@ -27,21 +27,6 @@ void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,
   Q_ = Q_in;
 }
 
-void KalmanFilter::CommonUpdate(const VectorXd &y) {
-  // Implement common equations for KF and EKF
-  MatrixXd Ht = H_.transpose();
-  MatrixXd S = H_ * P_ * Ht + R_;
-  MatrixXd Si = S.inverse();
-  MatrixXd PHt = P_ * Ht;
-  MatrixXd K = PHt * Si;
-
-  // New estimate
-  x_ = x_ + K * y;
-  long x_size = x_.size();
-  MatrixXd I = MatrixXd::Identity(x_size, x_size);
-  P_ = (I - K * H_) * P_;
-}
-
 void KalmanFilter::Predict() {
   /**
    * predict the state
@@ -55,9 +40,20 @@ void KalmanFilter::Update(const VectorXd &z) {
   /**
    *  update the state by using Kalman Filter equations
    */
-  VectorXd y = z - H_ * x_;
-  // Execute common equations 
-  CommonUpdate(y);
+  // Compute difference between measurement and predicted state
+  VectorXd y = z - H_ * x_; 
+  // Compute Kalman gain
+  MatrixXd Ht = H_.transpose();
+  MatrixXd S = H_ * P_ * Ht + R_;
+  MatrixXd Si = S.inverse();
+  MatrixXd PHt = P_ * Ht;
+  MatrixXd K = PHt * Si;
+
+  // New estimate
+  x_ = x_ + K * y;
+  long x_size = x_.size();
+  MatrixXd I = MatrixXd::Identity(x_size, x_size);
+  P_ = (I - K * H_) * P_;
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
@@ -89,8 +85,17 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
       y[1] -= 2.0 * M_PI;
     }
     // Compute Kalman gain
-    // Execute common equations 
-  	CommonUpdate(y);
+    MatrixXd Ht = H_.transpose();
+  	MatrixXd S = H_ * P_ * Ht + R_;
+  	MatrixXd Si = S.inverse();
+  	MatrixXd PHt = P_ * Ht;
+  	MatrixXd K = PHt * Si;
+
+  	// New estimate
+  	x_ = x_ + K * y;
+  	long x_size = x_.size();
+  	MatrixXd I = MatrixXd::Identity(x_size, x_size);
+  	P_ = (I - K * H_) * P_;
   }
 }
     
