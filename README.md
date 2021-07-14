@@ -5,7 +5,7 @@
 
 ## Prerequisites
 - To begin with, Udacity provides a [starter code](https://github.com/udacity/CarND-Extended-Kalman-Filter-Project/) for this project. This code uses WebSocket communication protocol to establish the communication between the sensor fusion software pipeline, i.e., the server-side, and the simulator, i.e., the client-side. 
-- This project requires some tools to successfully compile and run the said software pipeline, and the readers can find their details at [README.md](https://github.com/udacity/CarND-Extended-Kalman-Filter-Project/blob/master/README.md).
+- This project requires some tools to successfully compile and run the said software pipeline, and the readers can find their details [here](https://github.com/udacity/CarND-Extended-Kalman-Filter-Project/blob/master/README.md).
 - The main program can be built and run by executing the following commands from the project top directory.
 ```
 mkdir build
@@ -130,4 +130,4 @@ In these pictorials, green triangles represent the estimated state of the object
 
 Although the implemented software pipeline has achieved the RMSE below the given thresholds, the RMSE can be further minimized using a more sophisticated process model.  It may be noted that the EKF can especially perform poorly when the predict and update functions are highly nonlinear as the covariance is propagated through the linearization of the underlying nonlinear model in EKF.
 
-A better alternative could be to use an Unscented Kalman Filter (UKF) that approximates the probability distribution using sigma points. In particular, the UKF maps some points from the source Gaussian to the target Gaussian by transforming them using a nonlinear function. After that, it estimates the new mean and variance based on the transformed points. In many cases, the sigma points approximate the nonlinear model better than linearization does. In other words, the UKF can better estimate the turn rate of the objects of interest. Besides, the UKF does not require to compute a Jacobian matrix. 
+A better alternative could be to use an [Unscented Kalman Filter (UKF)](https://en.wikipedia.org/wiki/Kalman_filter) that approximates the probability distribution using sigma points. In particular, the UKF maps some points from the source Gaussian to the target Gaussian by transforming them using a nonlinear function. After that, it estimates the new mean and variance based on the transformed points. In many cases, the sigma points approximate the nonlinear model better than linearization does. In other words, the UKF can better estimate the turn rate of the objects of interest. Besides, the UKF does not require to compute a Jacobian matrix. 
