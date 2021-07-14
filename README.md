@@ -15,7 +15,7 @@ make
 /ExtendedKF
 ```
 ## Sensor Fusion Software Pipeline
-The intended pipeline is implemented based on the starter code. The soucre code files associated with the pipeline are included in `src` folder of this repository, and are listed below.
+The intended pipeline is implemented based on the starter code. The source code files associated with the pipeline are included in `src` folder of this repository and are listed below.
 ```
 src
 │───kalman_filter.h
@@ -31,9 +31,9 @@ src
 
 A brief overview of these files is provided as follows.
 - `kalman_filter.h`: It contains the declaration of the `KalmanFilter` class. This class includes the state (i.e., the position and velocity) vector `x`, state transition matrix `F`, state covariance matrix `P`, process noise covariance matrix `Q`, measurement noise covariance matrix `R`, and measurement transition matrix `H`. Moreover, it also incorporates the member functions, namely `Predict()`, `Update()`,  and `UpdateEKF()`.  
-- `kalman_filter.cpp`: It provides the definition of `Predict()`, `Update()`, and `UpdateEKF()` member functions of the `KalmanFilter` class. These functions are utilized to predict the object's new state and update the state based on the lidar and radar measurements, respectively.
+- `kalman_filter.cpp`: It provides the definition of `Predict()`, `Update()`, and `UpdateEKF()` functions that are utilized to predict the object's new state and update the state based on the lidar and radar measurements, respectively.
 - `tools.h`: It comprises the declaration of `Tools` class. This class includes the member functions `CalculateRMSE()` and `CalculateJacobian()`.
-- `tools.cpp`: It encompases the implementation of `CalculateRMSE()` and `CalculateJacobian()` member functions of `Tools` class. These function are used to calcuate the RMSE between the estimated state and the ground truth (i.e., object's actual state) and the Jacobian matrix (i.e., measurement transition matrix) for the radar measurements, respectively.
+- `tools.cpp`: It encompases the implementation of `CalculateRMSE()` and `CalculateJacobian()` that are used to calcuate the RMSE between the estimated state and the ground truth (i.e., object's actual state) and the Jacobian matrix (i.e., measurement transition matrix) for the radar measurements, respectively.
 - `measurement_package.h`: It includes the declaration of the `MeasurementPackage` class that temporarily stores the sensor measurement data with a timestamp. 
 - `FusionEKF.h`: It comprises the declaration of `FusionEKF` class. This class creates the objects of `KalmanFilter` and `Tools` classes and includes a member function `ProcessMeasurement()`. 
 - `FusionEKF.cpp`: It implements the definition of the `ProcessMeasurement()` member function of the `FusionEKF` class. This function initializes the object's state using the first sensor measurement and uses the subsequent measurements to predict and update the new state of the object. In particular, it first updates the state transition matrix `F` and process noise covariance matrix `Q` based on the time elapsed between the previous and new measurements. Next, it predicts the object's new state using the previous state vector `x`, state covariance matrix `P`, updated state transition matrix `F`, and updated process noise covariance matrix `Q`. After that, it updates the predicted state based on the type of measurement it has received from the simulator. Suppose the new measurement is from the lidar sensor. In that case, it uses measurement transition matrix `H` defined for the linear model since the lidar provides the measurements in the cartesian coordinate system only. Otherwise, it calculates the Jacobian matrix by calling the `CalculateJacobian()` function and uses it as the measurement transition matrix `H` for the nonlinear model. The reason is that the radar generates the measurements in the polar coordinate system, and the conversion from polar to the cartesian coordinate system involves nonlinear equations. 
