@@ -108,8 +108,8 @@ It can be observed that the RMSE for all the measurments is less than the given 
     <td>Output of Sensor Fusion for Dataset 2</td>
   </tr>
   <tr>
-     <td> <img src="./Output/output_dataset1.png" width="600" height="450"> </td>
-     <td> <img src="./Output/output_dataset2.png" width="600" height="450"> </td>
+     <td> <img src="./Output/output_dataset1.png" width="450" height="450"> </td>
+     <td> <img src="./Output/output_dataset2.png" width="450" height="450"> </td>
  </center>
  </table>
  <p></p>
