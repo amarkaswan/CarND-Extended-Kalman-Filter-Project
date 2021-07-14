@@ -107,7 +107,7 @@ It can be observed that the RMSE for all the measurments is less than the given 
     <td>Output of Sensor Fusion for Dataset 1</td>
   </tr>
   <tr>
-     <td> <img src="./Output/output_dataset1.png" width="600" height="600"> </td>
+     <td> <img src="./Output/output_dataset1.png" width="720" height="600"> </td>
  </center>
  </table>
  <p></p>
@@ -119,7 +119,7 @@ It can be observed that the RMSE for all the measurments is less than the given 
     <td>Output of Sensor Fusion for Dataset 2</td>
   </tr>
   <tr>
-     <td> <img src="./Output/output_dataset2.png" width="600" height="600"> </td>
+     <td> <img src="./Output/output_dataset2.png" width="720" height="600"> </td>
  </center>
  </table>
  <p></p>
@@ -131,8 +131,3 @@ In these pictorials, green triangles represent the estimated state of the object
 Although the implemented software pipeline has achieved the RMSE below the given thresholds, the RMSE can be further minimized using a more sophisticated process model.  It may be noted that the EKF can especially perform poorly when the predict and update functions are highly nonlinear as the covariance is propagated through the linearization of the underlying nonlinear model in EKF.
 
 A better alternative could be to use an Unscented Kalman Filter (UKF) that approximates the probability distribution using sigma points. In particular, the UKF maps some points from the source Gaussian to the target Gaussian by transforming them using a nonlinear function. After that, it estimates the new mean and variance based on the transformed points. In many cases, the sigma points approximate the nonlinear model better than linearization does. In other words, the UKF can better estimate the turn rate of the objects of interest. Besides, the UKF does not require to compute a Jacobian matrix. 
-
-
-
-
-
