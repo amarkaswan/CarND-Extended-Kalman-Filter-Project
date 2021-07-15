@@ -88,18 +88,41 @@ The following table lists the results obtained by the implemented sensor fusion 
   <tr>
     <td>Velocity in x dimension</td>
     <td>0.4513</td>
-    <td>0.4219</td>
+    <td>0.4216</td>
   </tr>
    <tr>
     <td>Velocity in y dimension</td>
     <td>0.4399</td>
-    <td>0.4937</td>
+    <td>0.4932</td>
   </tr>
  </table>
  <p></p>
 
 It can be observed that the RMSE for all the measurments is less than the given threshold values. The graphical representation of the above mentioned results are shown below. 
 
+<p></p>
+<table>
+ <center>
+  <tr>
+    <td>Output of Sensor Fusion for Dataset 1</td>
+  </tr>
+  <tr>
+     <td> <img src="./Output/output_dataset1.png" width="800" height="600"> </td>
+ </center>
+ </table>
+ <p></p>
+ 
+ <p></p>
+<table>
+ <center>
+  <tr>
+    <td>Output of Sensor Fusion for Dataset 2</td>
+  </tr>
+  <tr>
+     <td> <img src="./Output/output_dataset2.png" width="800" height="600"> </td>
+ </center>
+ </table>
+ <p></p>
 
 In these pictorials, green triangles represent the estimated state of the object, red circles denote the lidar measurements, and blue circles show the radar measurements with an arrow pointing in the direction of the observed angle. 
 
