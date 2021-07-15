@@ -42,18 +42,9 @@ void KalmanFilter::Update(const VectorXd &z) {
    */
   // Compute difference between measurement and predicted state
   VectorXd y = z - H_ * x_; 
-  // Compute Kalman gain
-  MatrixXd Ht = H_.transpose();
-  MatrixXd S = H_ * P_ * Ht + R_;
-  MatrixXd Si = S.inverse();
-  MatrixXd PHt = P_ * Ht;
-  MatrixXd K = PHt * Si;
-
-  // New estimate
-  x_ = x_ + K * y;
-  long x_size = x_.size();
-  MatrixXd I = MatrixXd::Identity(x_size, x_size);
-  P_ = (I - K * H_) * P_;
+  
+  // execute common equations of KF and EKF
+  UpdateCommon(y);
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
@@ -62,12 +53,10 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
    */
   VectorXd h_ = VectorXd(3);
   h_ << 0, 0, 0;
-  if(x_[0] == 0.0 && x_[1] == 0.0){
-    throw "UpdateEKF() - Error - Px and Py are zero: Divide by Zero";
-} else if(x_[0] == 0.0){
-    throw "UpdateEKF() - Error - Px is zero: Divide by Zero";
-  }
-  else{ 
+  if( (x_[0] == 0.0 && x_[1] == 0.0) || (x_[0] == 0.0) ){
+    cout << "UpdateEKF() - Error - Divide by Zero" << endl;
+    return; // to ignore the measurement
+} else{ 
     // Convert state data into radar measurement format using h(x) function
     double sq_px = x_[0] * x_[0];
     double sq_py = x_[1] * x_[1];
@@ -84,18 +73,24 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     while(y[1] > M_PI){
       y[1] -= 2.0 * M_PI;
     }
-    // Compute Kalman gain
-    MatrixXd Ht = H_.transpose();
-  	MatrixXd S = H_ * P_ * Ht + R_;
-  	MatrixXd Si = S.inverse();
-  	MatrixXd PHt = P_ * Ht;
-  	MatrixXd K = PHt * Si;
-
-  	// New estimate
-  	x_ = x_ + K * y;
-  	long x_size = x_.size();
-  	MatrixXd I = MatrixXd::Identity(x_size, x_size);
-  	P_ = (I - K * H_) * P_;
+    // execute common equations of KF and EKF
+    UpdateCommon(y);
   }
 }
-    
+     
+void KalmanFilter::UpdateCommon(const VectorXd &y){  
+  // implement common equations of KF and EKF
+  
+  // Compute Kalman gain
+  MatrixXd Ht = H_.transpose();
+  MatrixXd S = H_ * P_ * Ht + R_;
+  MatrixXd Si = S.inverse();
+  MatrixXd PHt = P_ * Ht;
+  MatrixXd K = PHt * Si;
+
+  // New estimate
+  x_ = x_ + K * y;
+  long x_size = x_.size();
+  MatrixXd I = MatrixXd::Identity(x_size, x_size);
+  P_ = (I - K * H_) * P_;
+}

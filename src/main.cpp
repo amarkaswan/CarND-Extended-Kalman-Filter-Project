@@ -129,13 +129,8 @@ int main() {
           estimate(3) = v2;
         
           estimations.push_back(estimate);
-          VectorXd RMSE(4);
 
-          try {
-            RMSE = tools.CalculateRMSE(estimations, ground_truth);
-          } catch (const char* msg) {
-            cerr << msg << endl;
-          }
+          VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
 
           json msgJson;
           msgJson["estimate_x"] = p_x;
