@@ -12,7 +12,7 @@ mkdir build
 cd build
 cmake ..
 make
-/ExtendedKF
+./ExtendedKF
 ```
 ## Sensor Fusion Software Pipeline
 The intended pipeline is implemented based on the starter code. The source code files associated with the pipeline are included in `src` folder of this repository and are listed below.
