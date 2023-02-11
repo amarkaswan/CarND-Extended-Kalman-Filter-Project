@@ -122,14 +122,24 @@ It can be observed that the RMSE for all the measurments is less than the given 
 
 
 
+https://user-images.githubusercontent.com/14021388/218285619-df09ca63-eef5-4dca-b418-787c73022b5d.mp4
+
+
+https://user-images.githubusercontent.com/14021388/218285621-cd67393d-b31a-4fc4-a2a5-c95d1c2613f3.mp4
+
+
+
+
+
 In these videos, the car depicts the actual location and direction of the object being tracked, green triangles represent the estimated state of the object, red circles denote the lidar measurements, and blue circles depict the radar measurements with an arrow pointing in the direction of the observed angle. 
 
-The readers are suggested to refer the following papers/books for a detailed discussions on Kalman Filter, Extended Kalman Filter, and filtering in general.
+The readers are encouraged to read the following papers/books for a detailed discussions on Kalman Filter, Extended Kalman Filter, and filtering in general.
 
+- [A new approach to linear filtering and prediction problems](https://asmedigitalcollection.asme.org/fluidsengineering/article-abstract/82/1/35/397706/A-New-Approach-to-Linear-Filtering-and-Prediction)
 - [An Introduction to the Kalman Filter](https://perso.crans.org/club-krobot/doc/kalman.pdf)
--[Optimal filtering](https://books.google.co.in/books?hl=en&lr=&id=iYMqLQp49UMC&oi=fnd&pg=PP1&dq=+Optimal+Filtering.&ots=axXgmG5I9n&sig=plwDDCfod-KI6z5I0GySKgLY5hg&redir_esc=y#v=onepage&q=Optimal%20Filtering.&f=false)
-- [Kalman and Extended Kalman Filters: Concept, Derivation and Properties](https://d1wqtxts1xzle7.cloudfront.net/81315221/kalman-libre.pdf?1645663509=&response-content-disposition=inline%3B+filename%3DKalman_and_Extended_Kalman_Filters_Conce.pdf&Expires=1676161690&Signature=ULy5rMv7PawvcUIHo-ltHOM~ltGnPpaMqsB~jkTBO~5mS6JouCCSIwjYVZ-~pvBhBdHZXU0whhBfA8dQkM41IigD6afLv8YGqUxrZFFyJz5ZFTEqoudMX~-CrYH9Gayl96sQT~-0dy5wBhMVPQVFcMBFVoYcvnLdLaAM-8FvxvJuOg23KHiLlo1pKnbU-Tow99TrXcKoKrTJvJrXIf7e6hX5s5FU2XagyqbHAFBVLMmY5GWDbDsiyY82q8ZfnLhio-ayEmfE1PhEBR03qrYcMHgslyZ4QF7qf-4BtIYHIURzq~nXA6AgDLxgtNxxERMJi2I5Vpr1g818Ktcn00N5fw__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
+- [Optimal filtering](https://books.google.co.in/books?hl=en&lr=&id=iYMqLQp49UMC&oi=fnd&pg=PP1&dq=+Optimal+Filtering.&ots=axXgmG5I9n&sig=plwDDCfod-KI6z5I0GySKgLY5hg&redir_esc=y#v=onepage&q=Optimal%20Filtering.&f=false)
 - [Stochastic processes and filtering theory](https://books.google.co.in/books?hl=en&lr=&id=4AqL3vE2J-sC&oi=fnd&pg=PP1&dq=+Stochastic+Processes+and+Filtering+Theory&ots=428Tz42C1O&sig=a_2VV9h0wZxWNBy2ci1z3K3Caao&redir_esc=y#v=onepage&q=Stochastic%20Processes%20and%20Filtering%20Theory&f=false)
+- [Kalman and Extended Kalman Filters: Concept, Derivation and Properties](https://d1wqtxts1xzle7.cloudfront.net/81315221/kalman-libre.pdf?1645663509=&response-content-disposition=inline%3B+filename%3DKalman_and_Extended_Kalman_Filters_Conce.pdf&Expires=1676161690&Signature=ULy5rMv7PawvcUIHo-ltHOM~ltGnPpaMqsB~jkTBO~5mS6JouCCSIwjYVZ-~pvBhBdHZXU0whhBfA8dQkM41IigD6afLv8YGqUxrZFFyJz5ZFTEqoudMX~-CrYH9Gayl96sQT~-0dy5wBhMVPQVFcMBFVoYcvnLdLaAM-8FvxvJuOg23KHiLlo1pKnbU-Tow99TrXcKoKrTJvJrXIf7e6hX5s5FU2XagyqbHAFBVLMmY5GWDbDsiyY82q8ZfnLhio-ayEmfE1PhEBR03qrYcMHgslyZ4QF7qf-4BtIYHIURzq~nXA6AgDLxgtNxxERMJi2I5Vpr1g818Ktcn00N5fw__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA)
 - [Kalman Filter for Robot Vision: A Survey](https://ieeexplore.ieee.org/abstract/document/5985520?casa_token=xCoPOq5__R4AAAAA:Zu7Z-ZTsGxmJUx43CkjMCvsoSDihcpOqxJa28PuR8-U7SSwDdfYvidUE6mTRCgmUuX4Db3UzHDA)
 
 ## Discussions
