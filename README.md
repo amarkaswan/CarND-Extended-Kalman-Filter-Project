@@ -22,7 +22,7 @@ The below flowchart represents various steps of the sensor fusion software pipel
 The sensor fusion software pipeline involves three key steps: initialization, prediction, and update. Let us briefly understand each of them as follows. 
 <p></p>
 
-- Initialization: The first sensor measurement (irrespective of the type of sensor) is used to initialize the state vector (i.e., position and velocity in `x` and `y` directions) of the moving object. 
+- Initialization: The first sensor measurement (irrespective of the type of sensor) is used to initialize the state vector (i.e., position and velocity in Cartesian space) of the moving object. 
 - Prediciton: At first, this step calculates the time elapsed since the last iteration. Next, it updates the state transition matrix and the process noise or covariance matrix based on the elapsed time. Finally, it predicts the new state vector using the bicycle motion model, assuming a constant velocity. 
 - Update: Here, the pipeline first maps the state vector into measurement space based on the type of sensor measurement using the state transition matrix. Then, it obtains the difference between the measurement and the predicted state, i.e., innovation provided by new sensor measurements in the estimation process. After that, it calculates the Kalman gain to combine the motion model's (or predicted state's) uncertainty and sensor measurements' uncertainty. The Kalman gain puts more weight on the motion model if the sensor measurements are very uncertain. Otherwise, it puts more weight on the sensor measurement. The predicted state is finally updated by adding the multiplication of the innovation with the Kalman gain.
 <p></p>
